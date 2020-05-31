@@ -1,11 +1,13 @@
 package pb.spring.web.controller;
 
+import lombok.val;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pb.spring.web.model.BeerDto;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.UUID;
 
 @RequestMapping("api/v1/beer/")
@@ -20,6 +22,7 @@ public class BeerController {
 
     @PostMapping
     public ResponseEntity saveNewBeer(@Valid @RequestBody BeerDto beerDto) {
+
         //todo
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

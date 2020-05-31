@@ -1,9 +1,6 @@
 package pb.spring.web.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
@@ -15,6 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class BeerDto {
+
 
     @Null
     private UUID id;
