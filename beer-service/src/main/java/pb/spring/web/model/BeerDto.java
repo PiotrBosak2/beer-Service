@@ -1,5 +1,6 @@
 package pb.spring.web.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.*;
@@ -22,6 +23,7 @@ public class BeerDto {
     @Null
     private Integer version;
     @Null
+    @JsonFormat(pattern = "yyyy--MM--dd",shape = JsonFormat.Shape.STRING)
     private OffsetDateTime createdDate;
     @Null
     private OffsetDateTime lastModifiedDate;
@@ -37,6 +39,7 @@ public class BeerDto {
 
     @NotNull
     @PositiveOrZero
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private BigDecimal price;
 
     private Integer quantityOnHand;
