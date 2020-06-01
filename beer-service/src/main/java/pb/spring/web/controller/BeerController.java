@@ -26,21 +26,17 @@ public class BeerController {
 
     @GetMapping("/{beerId}")
     public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID id) {
-
-        //todo real impl
         return new ResponseEntity<>(mapper.beerToBeerDto(service.findById(id)), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity saveNewBeer(@Valid @RequestBody BeerDto beerDto) {
         service.save(mapper.beerDtoToBeer(beerDto));
-        //todo
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/{beerId}")
     public ResponseEntity updateBeerById(@Valid @RequestBody BeerDto beerDto, @PathVariable("beerId") UUID id) {
-        //todo real impl
         var beer = service.findById(id);
         if (beer != null) {
             beer.setBeerName(beerDto.getBeerName());

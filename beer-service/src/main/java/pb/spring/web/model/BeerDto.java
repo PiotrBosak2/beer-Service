@@ -1,5 +1,7 @@
 package pb.spring.web.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.*;
 
 import javax.validation.constraints.*;
@@ -14,6 +16,7 @@ import java.util.UUID;
 public class BeerDto {
 
 
+    @JsonProperty("beerId")//overrides snake_casing
     @Null
     private UUID id;
     @Null
