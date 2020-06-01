@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.test.context.ActiveProfiles;
+import pb.spring.bootstrap.BeerLoader;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -24,7 +25,7 @@ class BeerDtoTest {
                 .createdDate(OffsetDateTime.now())
                 .lastModifiedDate(OffsetDateTime.now())
                 .price(new BigDecimal("10.00"))
-                .upc(432432432142L)
+                .upc(BeerLoader.BEER_2_UPC)
                 .build();
     }
 

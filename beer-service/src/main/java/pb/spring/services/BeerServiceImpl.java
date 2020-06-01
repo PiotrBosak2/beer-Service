@@ -2,12 +2,13 @@ package pb.spring.services;
 
 import org.springframework.stereotype.Service;
 import pb.spring.domain.Beer;
+import pb.spring.exception.NotFoundException;
 import pb.spring.repositories.BeerRepository;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-@Service
+@Service("beerService")
 public class BeerServiceImpl implements BeerService {
     private final BeerRepository repository;
 
@@ -25,7 +26,7 @@ public class BeerServiceImpl implements BeerService {
 
     @Override
     public Beer findById(UUID uuid) {
-        return repository.findById(uuid).orElse(null);
+        return repository.findById(uuid).orElseThrow(NotFoundException::new);
     }
 
     @Override
@@ -42,4 +43,5 @@ public class BeerServiceImpl implements BeerService {
     public void deleteById(UUID uuid) {
         repository.deleteById(uuid);
     }
+
 }

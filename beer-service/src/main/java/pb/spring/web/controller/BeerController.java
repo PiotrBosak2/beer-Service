@@ -1,5 +1,7 @@
 package pb.spring.web.controller;
 
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,6 +46,7 @@ public class BeerController {
             beer.setPrice(beerDto.getPrice());
             beer.setUpc(beerDto.getUpc());
             service.save(beer);
+            //we should do all of it in service
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

@@ -27,7 +27,7 @@ public class BeerDto {
     @Null
     private Integer version;
     @Null
-    @JsonFormat(pattern = "yyyy--MM--dd",shape = JsonFormat.Shape.STRING)
+    @JsonFormat(pattern = "yyyy--MM--dd", shape = JsonFormat.Shape.STRING)
     private OffsetDateTime createdDate;
     @Null
     @JsonSerialize(using = OffsetDateTimeSerializer.class)
@@ -40,8 +40,7 @@ public class BeerDto {
     @NotNull
     private BeerStyle beerStyle;
     @NotNull
-    @Positive
-    private Long upc;
+    private String upc;
 
     @NotNull
     @PositiveOrZero
