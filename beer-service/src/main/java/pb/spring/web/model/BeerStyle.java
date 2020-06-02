@@ -1,5 +1,5 @@
 package pb.spring.web.model;
 
 public enum BeerStyle {
-    STOUT,ALE,PALE_ALE
+    STOUT,ALE,PALE_ALE,IPA,PORTER
 }
