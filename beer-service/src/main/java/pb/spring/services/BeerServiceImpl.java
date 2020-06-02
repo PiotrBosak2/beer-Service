@@ -1,6 +1,7 @@
 package pb.spring.services;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import pb.spring.exception.NotFoundException;
 import pb.spring.repositories.BeerRepository;
@@ -10,6 +11,7 @@ import pb.spring.web.model.BeerDto;
 import java.util.UUID;
 
 @Service
+@Primary
 @RequiredArgsConstructor
 public class BeerServiceImpl implements BeerService {
 

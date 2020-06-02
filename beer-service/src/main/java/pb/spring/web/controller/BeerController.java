@@ -2,6 +2,7 @@ package pb.spring.web.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,14 +16,12 @@ import java.util.UUID;
 
 @RequestMapping("api/v1/beer/")
 @RestController
-
 public class BeerController {
 
-    private final BeerMapper mapper;
-    private final BeerService service;
 
-    public BeerController(BeerMapper mapper, BeerService service) {
-        this.mapper = mapper;
+    private final BeerService service;
+    @Autowired
+    public BeerController(BeerService service) {
         this.service = service;
     }
 
