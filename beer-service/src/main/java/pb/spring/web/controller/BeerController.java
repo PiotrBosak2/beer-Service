@@ -28,27 +28,18 @@ public class BeerController {
 
     @GetMapping("/{beerId}")
     public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID id) {
-        return new ResponseEntity<>(mapper.beerToBeerDto(service.findById(id)), HttpStatus.OK);
+        return new ResponseEntity<>(service.getById(id), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity saveNewBeer(@Valid @RequestBody BeerDto beerDto) {
-        service.save(mapper.beerDtoToBeer(beerDto));
+        service.saveNewBeer(beerDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/{beerId}")
     public ResponseEntity updateBeerById(@Valid @RequestBody BeerDto beerDto, @PathVariable("beerId") UUID id) {
-        var beer = service.findById(id);
-        if (beer != null) {
-            beer.setBeerName(beerDto.getBeerName());
-            beer.setBeerStyle(beerDto.getBeerStyle().name());
-            beer.setPrice(beerDto.getPrice());
-            beer.setUpc(beerDto.getUpc());
-            service.save(beer);
-            //we should do all of it in service
-        }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(service.updateBeer(id, beerDto), HttpStatus.NO_CONTENT);
     }
 }
 
