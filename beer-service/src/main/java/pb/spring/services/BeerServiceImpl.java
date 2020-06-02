@@ -2,13 +2,20 @@ package pb.spring.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import pb.spring.domain.Beer;
 import pb.spring.exception.NotFoundException;
 import pb.spring.repositories.BeerRepository;
 import pb.spring.web.mapper.BeerMapper;
 import pb.spring.web.model.BeerDto;
+import pb.spring.web.model.BeerPagedList;
+import pb.spring.web.model.BeerStyle;
 
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @Primary
@@ -39,5 +46,29 @@ public class BeerServiceImpl implements BeerService {
         beer.setPrice(beerDto.getPrice());
         beer.setUpc(beerDto.getUpc());
         return beerMapper.beerToBeerDto(repository.save(beer));
+    }
+
+    @Override
+    public BeerPagedList listBeers(String name, BeerStyle style, PageRequest pageRequest) {
+        BeerPagedList list;
+        Page<Beer> beerPage;
+        if (!StringUtils.isEmpty(name) && !StringUtils.isEmpty(style))
+            beerPage = repository.findAllByBeerNameAndAndBeerStyle(name, style, pageRequest);
+        else if (!StringUtils.isEmpty(name))
+            beerPage = repository.findAllByBeerName(name, pageRequest);
+        else if (!StringUtils.isEmpty(style))
+            beerPage = repository.findAllByBeerStyle(style, pageRequest);
+        else beerPage = repository.findAll(pageRequest);
+
+        list = new BeerPagedList(beerPage
+                .getContent()
+                .stream()
+                .map(beerMapper::beerToBeerDto)
+                .collect(Collectors.toList()));
+//                PageRequest.of(beerPage.getPageable().getPageNumber(),
+//                        beerPage.getPageable().getPageSize());
+//    }
+    return list;//may not work
+
     }
 }
