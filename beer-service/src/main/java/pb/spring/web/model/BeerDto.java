@@ -10,6 +10,7 @@ import pb.spring.web.jackson.OffsetDateTimeDeSerializer;
 import pb.spring.web.jackson.OffsetDateTimeSerializer;
 
 import javax.validation.constraints.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
@@ -18,8 +19,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BeerDto {
-
+public class BeerDto implements Serializable {
+    
+    private static final long serialVersionUID = 5597643332808209546L;
 
     @JsonProperty("beerId")//overrides snake_casing
     @Null

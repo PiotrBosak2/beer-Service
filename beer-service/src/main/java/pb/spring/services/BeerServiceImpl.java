@@ -1,6 +1,7 @@
 package pb.spring.services;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,6 +26,7 @@ public class BeerServiceImpl implements BeerService {
     private final BeerRepository repository;
     private final BeerMapper beerMapper;
 
+    @Cacheable(cacheNames = "beerCache",key = "#beerId",condition = "#withInventory == false ")
     @Override
     public BeerDto getById(UUID id, Boolean withInventory) {
         if (withInventory != null && withInventory) {
@@ -54,6 +56,7 @@ public class BeerServiceImpl implements BeerService {
         return beerMapper.beerToBeerDto(repository.save(beer));
     }
 
+    @Cacheable(cacheNames = "beerListCache", condition = "#withInventory == false ")
     @Override
     public BeerPagedList listBeers(String name, BeerStyle style, boolean withInventory, PageRequest pageRequest) {
         BeerPagedList list;
