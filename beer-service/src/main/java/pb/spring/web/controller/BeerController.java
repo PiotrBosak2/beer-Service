@@ -49,14 +49,24 @@ public class BeerController {
 
     @GetMapping("/{beerId}")
     public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID id,
-   @RequestParam(value = "withInventory", required = false) Boolean withInventory) {
-        return new ResponseEntity<>(service.getById(id,withInventory), HttpStatus.OK);
+                                               @RequestParam(value = "withInventory", required = false) Boolean withInventory) {
+        return new ResponseEntity<>(service.getById(id, withInventory), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity saveNewBeer(@Valid @RequestBody BeerDto beerDto) {
         service.saveNewBeer(beerDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @GetMapping("/beerUpc/{beerUpc}")
+    public ResponseEntity<BeerDto> getBeerByUPC(
+            @PathVariable("beerUpc") String upc,
+            @RequestParam(value = "withInventory", required = false) Boolean withInventory) {
+        if (withInventory == null)
+            withInventory = false;
+        var beerDto = service.getByUpc(upc,withInventory);
+        return new ResponseEntity<>(beerDto,HttpStatus.OK);
     }
 
     @PutMapping("/{beerId}")

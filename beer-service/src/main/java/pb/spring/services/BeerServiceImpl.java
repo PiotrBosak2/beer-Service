@@ -26,7 +26,7 @@ public class BeerServiceImpl implements BeerService {
     private final BeerRepository repository;
     private final BeerMapper beerMapper;
 
-    @Cacheable(cacheNames = "beerCache",key = "#beerId",condition = "#withInventory == false ")
+    @Cacheable(cacheNames = "beerCache", key = "#beerId", condition = "#withInventory == false ")
     @Override
     public BeerDto getById(UUID id, Boolean withInventory) {
         if (withInventory != null && withInventory) {
@@ -87,5 +87,17 @@ public class BeerServiceImpl implements BeerService {
 //    }
         return list;//may not work
 
+    }
+
+    @Override
+    @Cacheable(cacheNames = "beerUpcCache", condition = "#withInventory == false ")
+    public BeerDto getByUpc(String upc, Boolean withInventory) {
+        System.out.println("I was called");
+        var beer = repository.findBeerByUpc(upc);
+        BeerDto beerDto;
+        if (withInventory)
+            beerDto = beerMapper.beerToBeerDtoWithInventory(beer);
+        else beerDto = beerMapper.beerToBeerDto(beer);
+        return beerDto;
     }
 }
