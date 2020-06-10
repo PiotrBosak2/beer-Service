@@ -1,4 +1,4 @@
-package pb.spring.services;
+package pb.spring.services.brewing;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
