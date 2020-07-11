@@ -23,6 +23,7 @@ public class BeerLoader implements CommandLineRunner {
         loadBeerObjects();
     }
 
+
     private void loadBeerObjects() {
         if (beerRepository.count() == 0) {
             beerRepository.save(Beer.builder()
